@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from custom import k_means_clustering
+from kmeans.kmeans_pytorch import k_means_clustering
 
 
 @pytest.fixture
@@ -17,12 +17,14 @@ class TestKMeansClustering:
     def test_basic_function(self, k_means_setup):
         points, k, initial_centroids, max_iterations = k_means_setup
         expected_centroids = np.round(np.array([(1, 2), (10, 2)]), 4)
+        expected_assignments = [0, 0, 0, 1, 1, 1]
 
-        actual_centroids = k_means_clustering(
+        actual_centroids, actual_assignments = k_means_clustering(
             points, k, initial_centroids, max_iterations
         )
 
         assert np.allclose(expected_centroids, actual_centroids, rtol=1e-5)
+        assert np.array_equal(expected_assignments, actual_assignments)
 
     def test_empty_points(self, k_means_setup):
         _, k, initial_centroids, max_iterations = k_means_setup
@@ -38,16 +40,16 @@ class TestKMeansClustering:
         points, k, initial_centroids, _ = k_means_setup
         max_iterations = 1
 
-        centroids = k_means_clustering(points, k, initial_centroids, max_iterations)
+        centroids, _ = k_means_clustering(points, k, initial_centroids, max_iterations)
 
         assert len(centroids) == k
-        assert all(isinstance(centroid, tuple) for centroid in centroids)
+        assert all(isinstance(centroid, list) for centroid in centroids)
 
     def test_single_point(self, k_means_setup):
         _, k, initial_centroids, max_iteration = k_means_setup
         points = np.array([(1, 2)])
 
-        centroids = k_means_clustering(points, k, initial_centroids, max_iteration)
+        centroids, _ = k_means_clustering(points, k, initial_centroids, max_iteration)
 
         assert np.allclose(centroids, np.array([(1, 2), (10, 1)]), rtol=1e-5)
 

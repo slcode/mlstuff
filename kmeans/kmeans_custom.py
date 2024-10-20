@@ -1,11 +1,14 @@
 import numpy as np
+from typing import List
 
 
 def euclidean_distance(a, b):
     return np.sqrt(((a - b) ** 2).sum(axis=1))
 
 
-def k_means_clustering(points, k, initial_centroids, max_iterations):
+def k_means_clustering(
+    points, k, initial_centroids, max_iterations
+) -> List[List[float]]:
     if len(points) == 0:
         raise ValueError(
             "The points array is empty. Please provide a non-empty array of points."
@@ -39,4 +42,4 @@ def k_means_clustering(points, k, initial_centroids, max_iterations):
 
         centroids = new_centroids
 
-    return [tuple(centroid) for centroid in centroids]
+    return [list(centroid) for centroid in centroids], assignments
