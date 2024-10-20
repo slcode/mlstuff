@@ -1,5 +1,5 @@
 import numpy as np
-from typing import List
+from typing import List, Tuple
 
 
 def euclidean_distance(a, b):
@@ -8,7 +8,7 @@ def euclidean_distance(a, b):
 
 def k_means_clustering(
     points, k, initial_centroids, max_iterations
-) -> List[List[float]]:
+) -> Tuple[List[List[float]], List[int]]:
     if len(points) == 0:
         raise ValueError(
             "The points array is empty. Please provide a non-empty array of points."

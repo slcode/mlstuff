@@ -3,17 +3,17 @@ from typing import List, Tuple, Optional
 
 
 def k_means_clustering(
-    points: List[List[float]],
+    data_points: List[List[float]],
     k: int,
     initial_centroids: Optional[List[List[float]]] = None,
     max_iterations: int = 10,
 ) -> Tuple[List[List[float]], List[int]]:
-    if len(points) == 0:
+    if len(data_points) == 0:
         raise ValueError(
             "The points array is empty. Please provide a non-empty array of points."
         )
 
-    points = torch.tensor(points, dtype=torch.float)
+    points = torch.tensor(data_points, dtype=torch.float)
 
     if initial_centroids is not None:
         centroids = torch.tensor(initial_centroids, dtype=torch.float)
