@@ -42,7 +42,7 @@ class TestKMeansClustering:
 
         centroids, _ = k_means_clustering(points, k, initial_centroids, max_iterations)
 
-        assert len(centroids) == k + 1
+        assert len(centroids) == k
         assert all(isinstance(centroid, list) for centroid in centroids)
 
     def test_single_point(self, k_means_setup):
