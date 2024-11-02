@@ -1,5 +1,5 @@
 import pytest
-from k_fold_split import k_fold_split
+from kfold.k_fold_split import k_fold_split
 
 
 @pytest.fixture
